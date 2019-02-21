@@ -1,6 +1,6 @@
 /** @module convector-core-chaincode */
 
-import { Stub } from 'fabric-shim';
+import { Stub, ClientIdentity } from 'fabric-shim';
 import { getInvokables } from '@worldsibu/convector-core-controller';
 import { BaseStorage } from '@worldsibu/convector-core-storage';
 import { StubStorage } from '@worldsibu/convector-storage-stub';
@@ -79,9 +79,27 @@ export class Chaincode extends CC {
 
     const controllers = await config.getControllers();
 
-    controllers.forEach(C => Object.assign(this, getInvokables(C)));
+    const identity = new ClientIdentity(stub.getStub());
+    controllers.forEach(C => {
+      let invokables = getInvokables(C);
+      console.log(invokables);
+      let injectedInvokables = {};
+      Object.keys(invokables)
+        .map(fnName => {
+          injectedInvokables[fnName] = this.isFunction(invokables[fnName]) ?
+            (fingerPrint: string, _args: string[]) => invokables[fnName].call(this,
+              identity.getX509Certificate().fingerPrint, _args) : invokables[fnName];
+        });
+      return Object.assign(this, injectedInvokables);
+    });
 
+    // tslint:disable-next-line:no-debugger
+    debugger;
     this.initialized = true;
+  }
+
+  private isFunction(functionToCheck) {
+    return functionToCheck && {}.toString.call(functionToCheck) === '[object Function]';
   }
 
   /**

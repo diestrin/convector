@@ -19,6 +19,7 @@
     "prepare": "npm run build",
     "lint": "tslint --fix -c '../../tslint.json' -p './tsconfig.json'",
     "test": "mocha -r ts-node/register tests/**/*.spec.ts --reporter spec",
+    "test:debug": "node --inspect ./node_modules/.bin/mocha -r ts-node/register tests/**/*.spec.ts --reporter spec",
     "predocs:generate": "npm run clean:docs",
     "docs:generate": "typedoc src --mode file --out docs --target ES6 --excludePrivate",
     "docs:serve": "http-server docs"

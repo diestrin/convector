@@ -17,8 +17,21 @@ describe('Invokable Decorator', () => {
     constructor(ctr: any) {
       super();
 
-      Object.assign(this, getInvokables(ctr));
+      let invokables = getInvokables(ctr);
+      let injectedInvokables = {};
+
+      Object.keys(invokables)
+        .map(fnName => {
+          injectedInvokables[fnName] = isFunction(invokables[fnName]) ?
+            (fingerPrint: string, _args: string[]) => invokables[fnName].call(this,
+              'test:finger:print', _args) : invokables[fnName];
+        });
+      Object.assign(this, injectedInvokables);
     }
+  }
+
+  function isFunction(functionToCheck) {
+    return functionToCheck && {}.toString.call(functionToCheck) === '[object Function]';
   }
 
   class TestModel {
@@ -32,6 +45,11 @@ describe('Invokable Decorator', () => {
 
   @Controller('test')
   class Test {
+    @Invokable()
+    public async sender() {
+      return this.sender;
+    }
+
     @Invokable()
     public async plain(
       @Param(yup.string())
@@ -71,6 +89,14 @@ describe('Invokable Decorator', () => {
     const invokables = getInvokables(Test);
     expect(invokables.test_plain).to.exist;
     expect(invokables.test).to.exist;
+  });
+
+  it('should initialize and return the `this.sender`', async () => {
+
+    const result = await test.sender.call(testCC, new StubHelper(stub), []);
+    console.log('should initialize and return the `this.sender`');
+    console.log(result);
+    expect(result).to.not.eq('');
   });
 
   it('should translate a chaincode call into a controller call', async () => {

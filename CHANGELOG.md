@@ -1,7 +1,8 @@
-<a name="1.3.0"></a>
-# [1.3.0](https://github.com/hyperledger-labs/convector/compare/1.2.0...1.3.0) (2019-03-13)
+<a name="v1.3.0"></a>
+# [v1.3.0](https://github.com/hyperledger-labs/convector/compare/v1.2.0...v1.3.0) (2019-03-13)
+Checkout the [release post](https://medium.com/@worldsibu/convector-1-3-0-release-f4b9184e8ac8) for a quick overview
 
-
+<a name="v1.3.0-fixes"></a>
 ### Bug Fixes
 
 * fix silent error when isntalling chanincode ([#14](https://github.com/hyperledger-labs/convector/issues/14)) ([d36e9e9](https://github.com/hyperledger-labs/convector/commit/d36e9e9607e55d2406a71ce58a4a66fde05109a1))
@@ -10,6 +11,7 @@
 * FlatConvectorModel with optional properties ([#56](https://github.com/hyperledger-labs/convector/issues/56)) ([57ce2bb](https://github.com/hyperledger-labs/convector/commit/57ce2bb42d6357d346ecfdb0690c32c2f5d8379b))
 * update dependencies from theledger to latest ([#64](https://github.com/hyperledger-labs/convector/pull/64)) ([401f5e8](https://github.com/hyperledger-labs/convector/commit/401f5e8be14b6102dd8eba4ec3d26a4140ebd5d7))
 
+<a name="v1.3.0-features"></a>
 ### Features
 
 * add inheritance to convector models ([#53](https://github.com/hyperledger-labs/convector/issues/43)) ([10991dd](https://github.com/hyperledger-labs/convector/commit/10991ddca172fd5987c5e203a1e1885f1a52d998))
@@ -18,3 +20,5 @@
 * refactor convector client implementation and add browser support ([#55](https://github.com/hyperledger-labs/convector/pull/55)) ([30ec673](https://github.com/hyperledger-labs/convector/commit/30ec67386315266ea23c093698048c58514e9cf6))
 * add the convector-platform-fabric module ([#64](https://github.com/hyperledger-labs/convector/pull/64)) ([fea9b33](https://github.com/hyperledger-labs/convector/commit/fea9b330bb1cac146ba89dac0c0ad58c2da25746))
 * add convector-platform-browser package ([#64](https://github.com/hyperledger-labs/convector/pull/64)) ([d3e2035](https://github.com/hyperledger-labs/convector/commit/d3e2035c81aca433e422b4cf50a2886b68503000))
+* integrate with hurley for e2e tests ([#68](https://github.com/hyperledger-labs/convector/pull/68)) ([7042fd9](https://github.com/hyperledger-labs/convector/commit/7042fd919ca46a68b085948d0ffc4e8d9984db9f))
+* transient and private data features ([#69](https://github.com/hyperledger-labs/convector/pull/69)) ([3fa0442](https://github.com/hyperledger-labs/convector/commit/3fa0442c0c6cc1db982811f98e140c87178abb72))
